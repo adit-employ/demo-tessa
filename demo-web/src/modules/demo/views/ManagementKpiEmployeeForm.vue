@@ -52,7 +52,7 @@
             <v-card outlined class="mx-auto pa-5">
                 <strong>Key Performance Indicator Submission</strong>
                 <p></p>
-                <v-btn text color="warning" @click="goToProfileDetail()"> BACK </v-btn>
+                <v-btn text color="warning" @click="goToDashboard()"> BACK </v-btn>
                 <v-btn text color="primary" @click="goToProfileDetail()"> SUBMIT </v-btn>
                 <v-row>
                     <v-col>
@@ -106,7 +106,14 @@ export default {
                       this.$router.push({
                                  name: "employeeprofile"
                       });
-           }
+           },
+           goToDashboard(){
+                      this.$router.push({
+                                 name: "dashboard"
+                      });
+           },
+           
+           
   },
 };
 </script>
