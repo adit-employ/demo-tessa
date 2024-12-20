@@ -1,0 +1,35 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build dev
+  - build main
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+dev:
+  stage: build dev
+  script:
+    - cd academy-web
+    - PATCH_VERSION=$CI_PIPELINE_ID
+    - SEMVER="2.${PATCH_VERSION}"
+    - docker build -t widyansyahh/dev-academy-fe:$SEMVER . 
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push widyansyahh/dev-academy-fe:$SEMVER
+  only:
+    - dev
+
+prod:
+  stage: build main
+  script:
+    - cd academy-web
+    - PATCH_VERSION=$CI_PIPELINE_ID
+    - SEMVER="2.${PATCH_VERSION}"
+    - docker build -t widyansyahh/prod-academy-fe:$SEMVER . 
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push widyansyahh/prod-academy-fe:$SEMVER
+  only:
+    - main
