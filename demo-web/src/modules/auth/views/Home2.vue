@@ -1,10 +1,10 @@
 <template>
     <div class="background">
-        <div class="home-body">
-            <img :src="require('@/assets/images/ETG.png')" class="home-logo">
-            <h1 class="font-weight-bold">Xsis Academy</h1>
+        <div class="home-body text-center">
+            <!-- <img :src="require('@/assets/images/ETG.png')" class="home-logo"> -->
+            <h1 class="font-weight-bold">Demo Web</h1>
              <v-row>
-                <v-col cols="4" sm="4">
+                <v-col cols="12" sm="4" >
                     <v-text-field class="pl-12"
                     label="Email"
                     placeholder="Email"
@@ -13,17 +13,17 @@
                 </v-col>
             </v-row>
             <v-btn class="white--text btn-grad" rounded @click="openMasterPage">
-                Sign In By Pass
-                <v-icon>
-                    mdi-chevron-double-right
-                </v-icon>
-            </v-btn>
-            <v-btn class="white--text btn-grad" rounded @click="openSignTessa()">
                 Sign In
                 <v-icon>
                     mdi-chevron-double-right
                 </v-icon>
             </v-btn>
+            <!-- <v-btn class="white--text btn-grad" rounded @click="openSignTessa()">
+                Sign In
+                <v-icon>
+                    mdi-chevron-double-right
+                </v-icon>
+            </v-btn> -->
             <vue-home-footer />
         </div>
     </div>

@@ -61,7 +61,7 @@
             <v-spacer></v-spacer>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                    <v-btn icon v-on="on" @click="$router.push({name:'signout'})">
+                    <v-btn icon v-on="on" @click="$router.push({name:'home2'})">
                         <v-icon>mdi-export</v-icon>
                     </v-btn>
                 </template>
