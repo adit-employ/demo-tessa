@@ -1,3 +1,0 @@
-export const TYPES = {
-    SET_PROGRESS_UPLOAD: 'SET_PROGRESS_UPLOAD'
-}
