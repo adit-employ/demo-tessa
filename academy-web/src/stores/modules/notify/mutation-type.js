@@ -1,0 +1,4 @@
+export const TYPES = {
+    SET_SHOW_NOTIFY: 'SET_SHOW_NOTIFY',
+    REMOVE_NOTIFY: 'REMOVE_NOTIFY',
+}

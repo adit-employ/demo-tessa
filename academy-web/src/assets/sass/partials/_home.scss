@@ -1,0 +1,58 @@
+.background {
+    // background: url( '../images/background.jpg') no-repeat center center;
+    background: url( '../images/abstract-blur-restaurant.jpg') no-repeat center center;
+    background-size: cover;
+    background-color: #1f4397;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.home-body {
+    margin: auto auto;
+    width: 100%;
+    align-content:center;
+    text-align:center;
+}
+.btn-grad {
+    background-image: linear-gradient(to right, #1f4397 0%, #f58220  51%, #58595b  100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 50px;
+}
+.btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+html {
+    overflow-y: auto !important;
+}
+.home-logo {
+    max-width: 350px;
+    width: 100%;
+}
+.home-footer {
+    font-size: small;
+    position: fixed;
+    bottom:0;
+    width:100%;
+    background: transparent;
+ }
+ .redirect {
+    background: url( '../images/redirect.jpg') no-repeat center center;
+    background-size: cover;
+    background-color: #dededeb5;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
