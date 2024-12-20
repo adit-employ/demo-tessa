@@ -1,0 +1,191 @@
+<template>
+    <v-combobox v-model="selected"
+                    :search-input.sync="search"
+                    v-bind="{ ...$props }"
+                    @input="onInput"
+                    :prepend-icon="icon"
+                    @change="onChange"
+                    :return-object="false">
+        <template v-slot:selection="data">
+            <v-chip v-bind="data.attrs"
+                    :input-value="data.selected"
+                    close
+                    @click="data.select"
+                    @click:close="remove(data.item)">
+                <v-avatar left color="orange">
+                    {{ getInitial(data.item) }}
+                </v-avatar>
+                {{  getName(data.item) }}
+            </v-chip>
+        </template>
+        <template v-slot:item="data">
+            <template v-if="typeof data.item !== 'object'">
+                <v-list-item-content v-text="data.item"></v-list-item-content>
+            </template>
+            <template v-else >
+                <v-list-item-avatar color="orange">
+                    {{ data.item.initial }}
+                </v-list-item-avatar>
+                <v-list-item-content>
+                    <v-list-item-title v-html="data.item.display_name"></v-list-item-title>
+                    <v-list-item-subtitle v-html="data.item.email"></v-list-item-subtitle>
+                </v-list-item-content>
+            </template>
+        </template>
+    </v-combobox>
+</template>
+
+<script>
+    export default {
+        name: "VuePersonCombobox",
+        data: () => ({
+            selected: null,
+            search: null,
+        }),
+        props: {
+            value: {
+                type: [String, Number, Array],
+                default: null,
+            },
+            dense: {
+                type: Boolean,
+                default: false,
+            },
+            rules: {
+                type: Array,
+                default: () => [],
+            },
+            outlined: {
+                type: Boolean,
+                default: false,
+            },
+            placeholder: {
+                type: String,
+                default: "",
+            },
+            items: {
+                type: Array,
+                default: () => [],
+            },
+            appendIcon: {
+                type: String,
+                default: "",
+            },
+            hideDetails: {
+                type: Boolean,
+                default: false,
+            },
+            hideNoData: {
+                type: Boolean,
+                default: false,
+            },
+            hideSelected: {
+                type: Boolean,
+                default: true,
+            },
+            autoSelectFirst: {
+                type: Boolean,
+                default: false,
+            },
+            loading: {
+                type: Boolean,
+                default: false,
+            },
+            icon: {
+                type: String,
+                default: "",
+            },
+            itemText: {
+                type: [String, Array],
+                default: "",
+            },
+            itemValue: {
+                type: [String, Array, Object],
+                default: "",
+            },
+            label: {
+                type: String,
+                default: "",
+            },
+            clear: {
+                type: Boolean,
+                default: false,
+            },
+            clearable: {
+                type: Boolean,
+                default: true,
+            },
+            disabled: {
+                type: Boolean,
+                default: false,
+            },
+            multiple: {
+                type: Boolean,
+                default: false,
+            },
+            chips: {
+                type: Boolean,
+                default: false,
+            },
+            deletableChips: {
+                type: Boolean,
+                default: false,
+            },
+        },
+        watch: {
+            search(value) {
+                if (value !== this.selected) this.$emit("search", value);
+            },
+            value(value) {
+                this.selected = value;
+            },
+        },
+        mounted() {
+            this.selected = this.value;
+        },
+        methods: {
+            getName(email) {
+                let selected = [...this.items].filter(x =>
+                    x.email == email
+                );
+                if (selected.length > 0) return selected[0].display_name;
+                else return email;
+            },
+            getInitial(email) {
+                let selected = [...this.items].filter(x =>
+                    x.email == email
+                );
+                if (selected.length > 0) return selected[0].initial;
+                else return email.slice(0, 1).toUpperCase();
+            },
+            onInput() {
+                this.$emit("input", this.trimValue(this.selected));
+            },
+            onChange() {
+                this.search = null;
+                this.$emit("change", this.trimValue(this.selected));
+            },
+            trimValue(value) {
+                if (typeof value == 'string')
+                    return value.trim();
+                else if (typeof value == 'object')
+                    return value.map((a) => {
+                        return a.trim()
+                    });
+            },
+            removeValue() {
+                this.selected = null;
+                this.search = null;
+                this.$emit("removeValue");
+            },
+            remove(item) {
+                if (this.multiple) {
+                    const index = this.selected.indexOf(item)
+                    if (index >= 0) this.selected.splice(index, 1)
+                }
+                else this.selected = null;
+                
+            },
+        },
+    };
+</script>
